@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="root">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="query">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="count" type="xs:unsignedByte" />
+              <xs:element name="created" type="xs:dateTime" />
+              <xs:element name="lang" type="xs:string" />
+              <xs:element name="results">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="channel">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="astronomy">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="sunrise" type="xs:string" />
+                                <xs:element name="sunset" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="atmosphere">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="humidity" type="xs:unsignedByte" />
+                                <xs:element name="pressure" type="xs:decimal" />
+                                <xs:element name="rising" type="xs:unsignedByte" />
+                                <xs:element name="visibility" type="xs:decimal" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="description" type="xs:string" />
+                          <xs:element name="image">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="height" type="xs:unsignedByte" />
+                                <xs:element name="link" type="xs:string" />
+                                <xs:element name="title" type="xs:string" />
+                                <xs:element name="url" type="xs:string" />
+                                <xs:element name="width" type="xs:unsignedByte" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="item">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="condition">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="code" type="xs:unsignedByte" />
+                                      <xs:element name="date" type="xs:string" />
+                                      <xs:element name="temp" type="xs:unsignedByte" />
+                                      <xs:element name="text" type="xs:string" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="description" type="xs:string" />
+                                <xs:element name="forecast">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element maxOccurs="unbounded" name="element">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="code" type="xs:unsignedByte" />
+                                            <xs:element name="date" type="xs:string" />
+                                            <xs:element name="day" type="xs:string" />
+                                            <xs:element name="high" type="xs:unsignedByte" />
+                                            <xs:element name="low" type="xs:unsignedByte" />
+                                            <xs:element name="text" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="guid">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="isPermaLink" type="xs:boolean" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="lat" type="xs:decimal" />
+                                <xs:element name="link" type="xs:string" />
+                                <xs:element name="long" type="xs:decimal" />
+                                <xs:element name="pubDate" type="xs:string" />
+                                <xs:element name="title" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="language" type="xs:string" />
+                          <xs:element name="lastBuildDate" type="xs:string" />
+                          <xs:element name="link" type="xs:string" />
+                          <xs:element name="location">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="city" type="xs:string" />
+                                <xs:element name="country" type="xs:string" />
+                                <xs:element name="region" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="title" type="xs:string" />
+                          <xs:element name="ttl" type="xs:unsignedByte" />
+                          <xs:element name="units">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="distance" type="xs:string" />
+                                <xs:element name="pressure" type="xs:string" />
+                                <xs:element name="speed" type="xs:string" />
+                                <xs:element name="temperature" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="wind">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="chill" type="xs:unsignedByte" />
+                                <xs:element name="direction" type="xs:unsignedByte" />
+                                <xs:element name="speed" type="xs:unsignedByte" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

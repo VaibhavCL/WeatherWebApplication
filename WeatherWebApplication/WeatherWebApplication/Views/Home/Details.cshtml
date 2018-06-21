@@ -1,0 +1,61 @@
+﻿@model WeatherWebApplication.Models.CityWeather
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<head>
+    <style>
+        body {
+            background-image: url('../../Content/Images/background.png');
+            height: 100%;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        html{
+            height:100%;
+        }
+        .btn {
+            width: 100px;
+            padding: 4px;
+            border-radius: 25px;
+            border-color: skyblue;
+            background-color: transparent;
+            border-width: 3px;
+            font-weight: bold;
+            font-size: 16px;
+            font-family: 'Lucida Grande';
+        }
+        a{
+            color:black;
+        }
+    </style>
+</head>
+
+<h2>Details</h2>
+<body>
+    <div>
+        <h3>Press Ok to continue</h3>
+        <hr />
+        <dl class="dl-horizontal">
+            <dd>
+                @Html.DisplayFor(model => model.city)
+            </dd>
+        </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input class="btn" type="submit" value="Ok" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "weatherApp")
+            </div>
+        }
+    </div>
+</body>
+
+@*<p>
+        @Html.ActionLink("Back to List", "weather")
+    </p>*@

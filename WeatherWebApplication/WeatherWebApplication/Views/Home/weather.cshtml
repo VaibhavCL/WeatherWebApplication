@@ -1,0 +1,311 @@
+﻿@model WeatherWebApplication.Models.OpenWeatherMap
+@{
+    ViewBag.Title = "weather";
+}
+<head>
+    <style>
+        .search {
+            padding: 8px;
+            border-radius: 5px;
+            max-width: 170px;
+            width: 100%;
+            height: auto;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 5px;
+            text-align: center;
+            font-size: 15px;
+            /*-webkit-text-fill-color: #B2B2B2;*/
+            font-family: 'Lucida Grande';
+        
+            text-align:right;
+            margin-right:-3%;
+        }
+        .btn {
+            width: 100px;
+            padding: 4px;
+            border-radius: 25px;
+            border-color:skyblue;
+            background-color:transparent;
+            border-width:3px;
+            font-weight:bold;
+            font-size:16px;
+            font-family:'Lucida Grande';
+        }
+        #city {
+            text-align: center;
+            font-size: large
+        }
+
+        #today {
+        }
+
+        /*#hourlyTemp {
+            text-align: center;
+        }*/
+
+        #dailyTemp {
+            text-align: center;
+            background-color:black;
+            height: 100%;
+            width: 59%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            opacity: 0.6;
+            float:left;
+        }
+
+        #background {
+            background-image: url('../../Content/Images/853713_weather-hd-wallpapers_1280x1024_h.jpg');
+            height: 100%;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .addnew {
+            text-align: right;
+            margin-right: -3%;
+        }
+        #add {
+            text-align: center;
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            font-size: 20px;
+            padding: 2px;
+            position: relative;
+            z-index: 4;
+            border-radius: 14px;
+            width: 60%;
+            margin-right: -1%;
+            border-color: white !important;
+            padding-bottom: 4px !important;
+        }
+        .form-control {
+            padding: 8px;
+            border-radius: 5px;
+            max-width: 206px;
+            width: 100%;
+            height: auto;
+            margin-left: auto;
+            margin-top: 5px;
+            text-align: center;
+            font-size: 15px;
+            /* -webkit-text-fill-color: #B2B2B2; */
+            font-family: 'Lucida Grande';
+        }
+        #align{
+            align-content:inherit;
+            overflow-x:auto;
+        }
+        table, th, td {
+            border: 0px solid black;
+        }
+        .menu {
+            float: left;
+            width: 20%;
+            text-align: center;
+        }
+        .main {
+            float: right;
+            width: 40%;
+            height:100%;
+            padding: 0 20px;
+            color:white;
+            background-color:black;
+            opacity:0.6;
+
+        }
+        #weeklySizeId{
+            font-size:20px;
+        }
+        /*html{
+            height:100%;
+        }*/
+    </style>
+</head>
+<div class="container">
+    <div >
+        <button id="fbutton" class="btn" type="button" value="fahrenheit" >
+            Fahrenheit
+        </button>
+    </div>
+</div>
+
+<body id="background">
+    @using (Html.BeginForm("weather", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        if (ViewBag.cityValueMessage != null)
+        {
+            Response.Redirect("weather");
+        }
+        <p id="city">
+            <div>
+                <h2 style="text-align:center;color:white;">@ViewBag.City</h2>
+                <h4 style="text-align:center;color:white;">@ViewBag.condition</h4>
+                <h1 style="font-size:xx-large;text-align:center;color:white;">@ViewBag.temp °C</h1><br />
+            </div>
+        </p>
+
+        <p>
+            <table id="dailyTemp" style="float:left">
+                <tr>
+                    <td style="font-size:28px;color:white">Forecast</td>
+                </tr>
+                <tr><td><hr /></td></tr>
+            </table>
+            <table width="200" style="color:white" id="dailyTemp">
+
+
+                <tr align="right">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td align="right" id="align" style="text-align:center;font-size:25px;">Min Max</td>
+                </tr>
+
+                <tr>
+                    <td height="70"><text id="weeklySizeId">Monday</text></td>
+                    <td>
+                        <img height="32" width="32" src="~/Content/Images/clear_day@2x.png" />
+                    </td>
+                    <td></td>
+                    <td id="weeklySizeId"> @ViewBag.tuesLow°C @ViewBag.tuesHigh°C  </td>
+                </tr>
+                <tr>
+                    <td height="70"><text id="weeklySizeId">Tuesday</text></td>
+                    <td>
+                        <img height="32" width="32" src="~/Content/Images/scattered_showers_day_night@2x.png" />
+                    </td>
+                    <td></td>
+                    <td id="weeklySizeId"> @ViewBag.low°C @ViewBag.high°C<br /></td>
+                </tr>
+                <tr>
+                    <td height="70"><text id="weeklySizeId">Wednesday</text></td>
+                    <td><img height="32" width="32" src="~/Content/Images/icons8-night-40.png" /></td>
+                    <td></td>
+                    <td id="weeklySizeId">@ViewBag.low1°C @ViewBag.high1°C<br /></td>
+                </tr>
+                <tr>
+                    <td height="70"><text id="weeklySizeId">Thursday</text></td>
+                    <td>
+                        <img height="32" width="32" src="~/Content/Images/fair_day@2x.png" />
+                    </td>
+                    <td></td>
+                    <td id="weeklySizeId">@ViewBag.low2°C @ViewBag.high2°C  <br /></td>
+                </tr>
+                <tr>
+                    <td height="70"><text id="weeklySizeId">Friday</text></td>
+                    <td>  <img height="32" width="32" src="~/Content/Images/clear_day@2x.png" /></td>
+                    <td></td>
+                    <td id="weeklySizeId"> @ViewBag.low3°C @ViewBag.high3°C <br /></td>
+                </tr>
+                <tr>
+                    <td height="70"><text id="weeklySizeId">Saturday</text></td>
+                    <td>    <img height="32" width="32" src="~/Content/Images/icons8-night-40.png" /></td>
+                    <td></td>
+                    <td id="weeklySizeId"> @ViewBag.low4°C @ViewBag.high4°C<br /></td>
+                </tr>
+                <tr>
+                    <td height="70"><text id="weeklySizeId">Sunday</text> </td>
+                    <td>   <img height="32" width="32" src="~/Content/Images/clear_day@2x.png" /></td>
+                    <td></td>
+                    <td id="weeklySizeId"> @ViewBag.low5°C @ViewBag.high5°C<br /></td>
+                </tr>
+                <tr>
+                    <td height="70"><text id="weeklySizeId">Monday</text> </td>
+                    <td>   <img height="32" width="32" src="~/Content/Images/clear_day@2x.png" /></td>
+                    <td></td>
+                    <td id="weeklySizeId"> @ViewBag.low6°C @ViewBag.high6°C<br /></td>
+                </tr>
+                <tr>
+                    <td height="70"><text id="weeklySizeId">Tuesday</text> </td>
+                    <td>   <img height="32" width="32" src="~/Content/Images/clear_day@2x.png" /></td>
+                    <td></td>
+                    <td id="weeklySizeId"> @ViewBag.lowWed°C @ViewBag.highWed°C<br /></td>
+                </tr>
+                <tr>
+                    <td height="70"><text id="weeklySizeId">Wednesday</text> </td>
+                    <td>   <img height="32" width="32" src="~/Content/Images/clear_day@2x.png" /></td>
+                    <td></td>
+                    <td id="weeklySizeId"> @ViewBag.lowThurs°C @ViewBag.highThurs°C<br /></td>
+                </tr>
+            </table>
+
+
+            <div class="main">
+                <h3>Details</h3>
+                <hr />
+                <img height="80" width="80" src="~/Content/Images/clear_day@2x.png" />
+
+                @*<table>
+                        <tr><td style="font-size:21px;color:white">Details </td></tr>
+                        <tr>
+                            <td>
+                                <div style="overflow:hidden">
+                                    <img src="~/Content/Images/clear_day@2x.png" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>*@
+
+                <div style="font-size:21px;float:right;">
+
+                    <ul style="color:white">
+                        <li>
+                            <div>Feels like &emsp;&emsp;&emsp; @ViewBag.temp °C</div>
+                            @*<div>@ViewBag.temp °C</div>*@
+                        </li>
+                        <li>
+                            <div>Humidity &emsp;&emsp;&emsp;&ensp; @ViewBag.humidit</div>
+                            <div>@*@ViewBag.humidit*@</div>
+                        </li>
+                        <li>
+                            <div>Visibility &emsp;&emsp;&emsp;&ensp; @ViewBag.visibilit</div>
+                            <div>@*@ViewBag.visibilit*@</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </p>
+    }
+    </body>
+<form>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://query.yahooapis.com/v1/public/yql?q=select wind from weather.forecast where woeid in (select woeid from geo.places(1) where text='@ViewBag.City')&format=json&callback=callbackFunction"></script>
+    <script>
+
+
+        //$("#other").click(function () {
+        //$("#target").click();
+        //});
+        $("#fbutton").click(function () {
+            var cityName = "@ViewBag.City";
+        $.ajax({
+        type: "POST",
+        url: '@Url.Action("fahrenheit", "Home")',
+        data: { cityFahrenValue: cityName },
+        success: function (resultData) {
+        window.location.href = '@Url.Action("fahrenheit", "Home")';
+        }
+        });
+        });
+    </script>
+    <script>
+        var callbackFunction = function (data) {
+            var wind = data.query.results.channel.wind;
+            alert(wind.chill);
+        };
+    </script>
+</form>
+
+
+

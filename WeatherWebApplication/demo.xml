@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<user>
+<details>
+<name>abc</name>
+<class>xyz</class>
+<city>pqr</city>
+</details>
+<info>
+<id>123</id>
+<code>456</code>
+</info>
+</user>

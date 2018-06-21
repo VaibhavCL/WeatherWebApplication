@@ -1,0 +1,224 @@
+﻿@model IEnumerable<WeatherWebApplication.Models.CityWeather>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #imag {
+            background-image: url('../../Content/Images/853713_weather-hd-wallpapers_1280x1024_h.jpg');
+            height: 100%;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        dt, dd {
+            line-height: 1.628571;
+        }
+
+        .search {
+            padding: 8px;
+            border-radius: 5px;
+            max-width: 170px;
+            width: 100%;
+            height: auto;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 5px;
+            text-align: center;
+            font-size: 15px;
+            /*-webkit-text-fill-color: #B2B2B2;*/
+            font-family: 'Lucida Grande';
+            text-align: right;
+            margin-right: -3%;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        #searchId {
+            text-align: center;
+            background-color: dodgerblue;
+            /*color: white;*/
+            border: 0px solid white;
+            font-size: 20px;
+            padding: 2px;
+            position: relative;
+            z-index: 4;
+            border-radius: 50%;
+            height:100%;
+            width: 33%;
+            margin-right: -1%;
+            /*border-color: white !important;*/
+            padding-bottom: 4px !important;
+        }
+        #searchIdPlus {
+            text-align: center;
+            background-color: dodgerblue;
+            /*color: white;*/
+            border: 0px solid white;
+            font-size: 20px;
+            padding: 2px;
+            position: relative;
+            z-index: 4;
+            border-radius: 50%;
+            height: 100%;
+            width: 33%;
+            margin-right: -1%;
+            /*border-color: white !important;*/
+            padding-bottom: 4px !important;
+        }
+       a{
+           color:white;
+       }
+    </style>
+</head>
+
+
+<body id="imag">
+
+    @using (Html.BeginForm("weatherApp", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+
+        <div class="search">
+            @*<input type="text" id="txtPlaces" style="width: 250px" placeholder="Enter a location" class="form-control">*@
+
+            <label id="map"></label>
+            <div class="container">
+                @*<form method="post" action="@Url.Action("search","Home")">
+                    <button id="searchId" class="searchCity" &#8203;class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Search</button><br />
+                </form>*@
+                <dl>
+                <dd id="searchIdPlus" @*class="searchCity"*@>
+                    @Html.ActionLink("+", "search",new { @ViewBag.temp })
+                </dd>
+            
+                </dl>
+            </div>
+        </div>
+
+        @*<table>
+        <tr>
+            <td>
+                @foreach (var item in Model)
+                {
+                <div>
+                    <table id="table" align="center" width="50%" style="text-align:center;font-size:28px;color:black;" data-target="#desModal">
+                        <tr><td><a href="@item.city" id="cityIdForeach" onclick="detailsCity('@item.city')"> @item.city </a></td></tr>
+                        <tr><td><a href="@item.temperature" id="cityIdForeach" onclick="detailsCity('@item.temperature')"> @item.temperature </a></td></tr>
+                        <tr><td><a href="@item.humidity" id="cityIdForeach" onclick="detailsCity('@item.humidity')"> @item.humidity </a></td></tr>
+                        <tr><td><a href="@item.visibility" id="cityIdForeach" onclick="detailsCity('@item.visibility')"> @item.visibility </a></td></tr>
+                    </table>
+                </div>
+                }
+            </td>
+        </tr>
+
+    </table>*@
+
+
+            <table id="table" align="center" width="100%" style="text-align:center;font-size:28px;color:white;background-color:black;opacity:0.6;" data-target="#desModal"class="table">
+                
+                @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @*<a href="@item.city" id="cityIdForeach" onclick="detailsCity('@item.city')"> @item.city </a>*@
+                </td>
+                <td>
+                    @Html.ActionLink(item.city, "weather", new { cityValue = item.city })
+                    @*<a onclick="location.href='@Url.Action(item.city,"weather",new { cityValue = item.city })'"></a>*@
+                </td>
+                @*<td>
+                @Html.ActionLink(item.temperature.ToString(), "weather", new { cityValue = item.temperature.ToString()})
+            </td>*@
+                <td> @item.temperature °C</td>
+                <td>
+                    <a>
+                        @Html.ActionLink("Delete", "Delete", new { city = item.city })
+                    </a>
+                </td>
+            </tr>
+
+}
+            </table>
+
+        <form>
+            <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+            <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+            <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+            <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAGF8cAOPFPIKCZYqxuibF9xx5XD4JBb84&sensor=false&libraries=places"></script>
+            <script type="text/javascript">
+
+                google.maps.event.addDomListener(window, 'load', function () {
+                    var places = new google.maps.places.Autocomplete(document.getElementById('txtPlaces'));
+                    google.maps.event.addListener(places, 'place_changed', function () {
+                        var place = places.getPlace();
+                        var address = place.formatted_address;
+                        var latitude = place.geometry.location.A;
+                        var longitude = place.geometry.location.F;
+                        var mesg = "Address: " + address;
+                        mesg += "\nLatitude: " + latitude;
+                        mesg += "\nLongitude: " + longitude;
+                    });
+                });
+
+            </script>
+            <script type="text/javascript">
+
+
+                //This is used to get a required location's temperature by using searchId
+
+            $("#searchId").click(function () {
+                var cityName = $("#txtPlaces").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("weatherApp", "Home")',
+                data: { objcity: cityName },
+                        success: function (resultData) {
+                            window.location.href = '@Url.Action("weatherApp", "Home")';
+                }
+            });
+        });
+
+           // In this we have the list of all places in a page, and by clicking on the particular location
+           // we get full details of a particular location
+
+                     function detailsCity(cityVal)
+                     {
+                         $.ajax({
+                type: "POST",
+                url: '@Url.Action("weather", "Home")',
+                data: { cityValue: cityVal },
+                success: function (resultData)
+                {
+                     window.location.href = '@Url.Action("weather", "Home")';
+                }
+                             });
+                     }
+
+                     $(document).ready(function () {
+                         var city = @ViewBag.City;
+                         var searchtext = "select item.condition from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + @ViewBag.City + "') and u='c'"
+                         //change city variable dynamically as required
+                         $.getJSON("https://query.yahooapis.com/v1/public/yql?q=" + searchtext + "&format=json").success(function (data) {
+                             console.log(data);
+                             $('#temp').html("Temperature in " + @ViewBag.City + " is " + data.query.results.channel.item.condition.temp + "°C");
+                         });
+                     });
+
+            </script>
+        </form>
+    }
+</body>
+</html>

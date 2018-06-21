@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WeatherWebApplication</name>
+    </assembly>
+    <members>
+        <member name="T:WeatherWebApplication.Controllers.DefaultController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.DefaultController.weatherApi(WeatherWebApplication.Models.CityWeather)">
+            <summary>
+            
+            </summary>
+            <param name="cityValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.DefaultController.AddCity(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            This action is used to add the values to the database
+            </summary>
+            <param name="city"></param>
+            <param name="temp"></param>
+            <param name="humidity"></param>
+            <param name="visibility"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WeatherWebApplication.Controllers.HomeController">
+            <summary>
+            It contains all the actions for creating weather values 
+            </summary>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.Index">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.About">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.Contact">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.weatherApp(System.String,System.String)">
+            <summary>
+            This action is used to get a details of temperature of required location
+            </summary>
+            <param name="objcity"></param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.convertCelcius(System.Int32)">
+            <summary>
+            Converting fahrenheit to celsius
+            </summary>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.weather(System.String,System.String)">
+            <summary>
+            This action is used to show all the details of particular location 
+            when we click on the location in weatherApp page
+            </summary>
+            <param name="cityValue"></param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.AddCity(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            This action is used to add the values to the database
+            </summary>
+            <param name="city"></param>
+            <param name="temp"></param>
+            <param name="humidity"></param>
+            <param name="visibility"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.cityList">
+            <summary>
+            This action is used to fetch all the values from the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.fahrenheit(System.String)">
+            <summary>
+            getting the values from fahreneit values from post method
+            </summary>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.fahrenheit(System.String,System.String)">
+            <summary>
+            This action is used to convert from celcius to fahrenheit
+            </summary>
+            <param name="cityFahrenValue"></param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.Delete(System.String)">
+            <summary>
+            get method
+            </summary>
+            <param name="city"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.Delete(System.String,System.Web.Mvc.FormCollection)">
+            <summary>
+            deletes the values of required location
+            </summary>
+            <param name="city"></param>
+            <param name="collection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.Details(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="cityValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.search(WeatherWebApplication.Models.CityWeather,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="cityValue"></param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.weatherApi(System.String)">
+            <summary>
+            getting the values from post method of weatherApi
+            </summary>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.HomeController.weatherApi(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="cityValue"></param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.OpenWeatherMapMvcController.weatherApp(System.String,System.String)">
+            <summary>
+            This action is used to get a details of temperature of required location
+            </summary>
+            <param name="objcity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.OpenWeatherMapMvcController.weather(System.String,System.String)">
+            <summary>
+            This action is used to show all the details of particular location 
+            when we click on the location in weatherApp page
+            </summary>
+            <param name="cityValue"></param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.OpenWeatherMapMvcController.AddCity(System.String,System.Int32)">
+            <summary>
+            This action is used to add the values to the database
+            </summary>
+            <param name="city"></param>
+            <param name="temp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.OpenWeatherMapMvcController.cityList">
+            <summary>
+            This action is used to fetch all the values from the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.OpenWeatherMapMvcController.fahrenheit(System.String,System.String)">
+            <summary>
+            This action is used to convert from celcius to fahrenheit
+            </summary>
+            <param name="cityFahrenValue"></param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WeatherWebApplication.Controllers.WeatherController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WeatherWebApplication.Controllers.WeatherWebController.weatherApi(System.String)">
+            <summary>
+            weatherApi
+            </summary>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

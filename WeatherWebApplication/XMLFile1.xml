@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <query>
+      <count>1</count>
+      <created>2018-05-03T11:24:42Z</created>
+      <lang>en-us</lang>
+      <results>
+         <channel>
+            <astronomy>
+               <sunrise>6:24 am</sunrise>
+               <sunset>11:35 pm</sunset>
+            </astronomy>
+            <atmosphere>
+               <humidity>85</humidity>
+               <pressure>1006.0</pressure>
+               <rising>0</rising>
+               <visibility>16.1</visibility>
+            </atmosphere>
+            <description>Yahoo! Weather for Nome, AK, US</description>
+            <image>
+               <height>18</height>
+               <link>http://weather.yahoo.com</link>
+               <title>Yahoo! Weather</title>
+               <url>http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif</url>
+               <width>142</width>
+            </image>
+            <item>
+               <condition>
+                  <code>29</code>
+                  <date>Thu, 03 May 2018 02:00 AM AKDT</date>
+                  <temp>23</temp>
+                  <text>Partly Cloudy</text>
+               </condition>
+               <description><![CDATA[<img src="http://l.yimg.com/a/i/us/we/52/29.gif"/>
+<BR />
+<b>Current Conditions:</b>
+<BR />Partly Cloudy
+<BR />
+<BR />
+<b>Forecast:</b>
+<BR /> Thu - Mostly Sunny. High: 33Low: 22
+<BR /> Fri - Breezy. High: 35Low: 25
+<BR /> Sat - Mostly Cloudy. High: 35Low: 28
+<BR /> Sun - Cloudy. High: 31Low: 27
+<BR /> Mon - Partly Cloudy. High: 32Low: 28
+<BR />
+<BR />
+<a href="http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2460286/">Full Forecast at Yahoo! Weather</a>
+<BR />
+<BR />
+<BR />
+]]></description>
+               <forecast>
+                  <element>
+                     <code>34</code>
+                     <date>03 May 2018</date>
+                     <day>Thu</day>
+                     <high>33</high>
+                     <low>22</low>
+                     <text>Mostly Sunny</text>
+                  </element>
+                  <element>
+                     <code>23</code>
+                     <date>04 May 2018</date>
+                     <day>Fri</day>
+                     <high>35</high>
+                     <low>25</low>
+                     <text>Breezy</text>
+                  </element>
+                  <element>
+                     <code>28</code>
+                     <date>05 May 2018</date>
+                     <day>Sat</day>
+                     <high>35</high>
+                     <low>28</low>
+                     <text>Mostly Cloudy</text>
+                  </element>
+                  <element>
+                     <code>26</code>
+                     <date>06 May 2018</date>
+                     <day>Sun</day>
+                     <high>31</high>
+                     <low>27</low>
+                     <text>Cloudy</text>
+                  </element>
+                  <element>
+                     <code>30</code>
+                     <date>07 May 2018</date>
+                     <day>Mon</day>
+                     <high>32</high>
+                     <low>28</low>
+                     <text>Partly Cloudy</text>
+                  </element>
+                  <element>
+                     <code>28</code>
+                     <date>08 May 2018</date>
+                     <day>Tue</day>
+                     <high>41</high>
+                     <low>26</low>
+                     <text>Mostly Cloudy</text>
+                  </element>
+                  <element>
+                     <code>30</code>
+                     <date>09 May 2018</date>
+                     <day>Wed</day>
+                     <high>47</high>
+                     <low>35</low>
+                     <text>Partly Cloudy</text>
+                  </element>
+                  <element>
+                     <code>28</code>
+                     <date>10 May 2018</date>
+                     <day>Thu</day>
+                     <high>41</high>
+                     <low>35</low>
+                     <text>Mostly Cloudy</text>
+                  </element>
+                  <element>
+                     <code>30</code>
+                     <date>11 May 2018</date>
+                     <day>Fri</day>
+                     <high>37</high>
+                     <low>33</low>
+                     <text>Partly Cloudy</text>
+                  </element>
+                  <element>
+                     <code>30</code>
+                     <date>12 May 2018</date>
+                     <day>Sat</day>
+                     <high>42</high>
+                     <low>29</low>
+                     <text>Partly Cloudy</text>
+                  </element>
+               </forecast>
+               <guid>
+                  <isPermaLink>false</isPermaLink>
+               </guid>
+               <lat>64.499474</lat>
+               <link>http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2460286/</link>
+               <long>-165.405792</long>
+               <pubDate>Thu, 03 May 2018 02:00 AM AKDT</pubDate>
+               <title>Conditions for Nome, AK, US at 02:00 AM AKDT</title>
+            </item>
+            <language>en-us</language>
+            <lastBuildDate>Thu, 03 May 2018 03:24 AM AKDT</lastBuildDate>
+            <link>http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-2460286/</link>
+            <location>
+               <city>Nome</city>
+               <country>United States</country>
+               <region> AK</region>
+            </location>
+            <title>Yahoo! Weather - Nome, AK, US</title>
+            <ttl>60</ttl>
+            <units>
+               <distance>mi</distance>
+               <pressure>in</pressure>
+               <speed>mph</speed>
+               <temperature>F</temperature>
+            </units>
+            <wind>
+               <chill>16</chill>
+               <direction>45</direction>
+               <speed>7</speed>
+            </wind>
+         </channel>
+      </results>
+   </query>
+</root>

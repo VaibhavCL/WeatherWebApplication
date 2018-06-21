@@ -1,0 +1,116 @@
+﻿@model WeatherWebApplication.Models.OpenWeatherMap
+@{
+    ViewBag.Title = "weatherForecast";
+}
+
+<h2>weatherForecast</h2>
+
+<style>
+    #apiDiv {
+        padding-left: 20px;
+    }
+
+        #apiDiv select, #apiDiv button {
+            font-size: 25px;
+        }
+
+        #apiDiv h4 {
+            margin: 10px 0;
+        }
+
+        #apiDiv #message table {
+            /*width: 100%;
+            border: double 1px #00ffff;
+            background: #ff6a00;*/
+        }
+
+            #apiDiv #message table th {
+                text-align: left;
+                /*background: #4CAF50;*/
+            }
+
+    #searchId {
+        font-size: 16px;
+        border-radius: 25px;
+        width: 100px;
+        padding: 4px;
+        border-color: skyblue;
+        background-color: transparent;
+        border-width: 3px;
+        font-weight: bold;
+        font-family: Lucida Grande;
+    }
+    .search {
+        padding: 8px;
+        border-radius: 5px;
+        max-width: 170px;
+        width: 100%;
+        height: auto;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 5px;
+        text-align: center;
+        font-size: 15px;
+        /*-webkit-text-fill-color: #B2B2B2;*/
+        font-family: 'Lucida Grande';
+        text-align: right;
+        margin-right: -3%;
+    }
+</style>
+
+
+@using (Html.BeginForm())
+{<button id="reset" name="reset">Reset »</button>}
+
+ <div class="search">
+     <input type="text" id="txtPlaces" style="width: 250px" placeholder="Enter a location" class="form-control">
+
+     <label id="map"></label>
+     <div class="container">
+         <button id="searchId" onclick="search()" class="searchCity" &#8203;class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Search</button><br />
+     </div>
+ </div>
+
+
+<div id="apiDiv">
+    <h4>Select the City for Weather Report</h4>
+    @using (Html.BeginForm())
+    {
+        foreach (var city in Model.cities)
+        {
+            <span style="background-color:white">
+                @Html.RadioButtonFor(m => m.cities, city.Value) @city.Key
+            </span>
+        }
+
+        <button name="submit">Submit</button>
+    }
+    <div id="message">@(new HtmlString(Model.apiResponse))</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("input[id='cities']").change(function () {
+            $(this).parents("#apiDiv").find("span").css("background", "none");
+            $(this).parent().css("background", "white");
+        });
+    });
+
+
+     $("#searchId").click(function () {
+            debugger;
+                var cityName = $("#txtPlaces").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("weatherForecast", "WeatherWeb")',
+                data: { cityValue: cityName },
+                success: function (resultData)
+                {
+                     window.location.href = '@Url.Action("weatherForecast", "WeatherWeb")';
+                }
+            });
+        });
+</script>

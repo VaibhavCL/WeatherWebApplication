@@ -1,0 +1,242 @@
+﻿@model IEnumerable<WeatherWebApplication.Models.CityWeather>
+
+@{
+    ViewBag.Title = "weatherApi";
+}
+
+<head>
+    <style>
+        #imag {
+            background-image: url('../../Content/Images/853713_weather-hd-wallpapers_1280x1024_h.jpg');
+            /*background-image: url('../../Content/Images/background.png');*/
+            height: 100%;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        dt, dd {
+            line-height: 1.628571;
+        }
+
+        .search {
+            padding: 8px;
+            border-radius: 5px;
+            max-width: 170px;
+            width: 100%;
+            height: auto;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 5px;
+            text-align: center;
+            font-size: 15px;
+            /*-webkit-text-fill-color: #B2B2B2;*/
+            font-family: 'Lucida Grande';
+            text-align: right;
+            margin-right: -3%;
+        }
+
+        /*html {
+            height: 100%;
+        }*/
+
+        #searchId {
+            text-align: center;
+            background-color: dodgerblue;
+            /*color: white;*/
+            border: 0px solid white;
+            font-size: 20px;
+            padding: 2px;
+            position: relative;
+            z-index: 4;
+            border-radius: 50%;
+            height: 100%;
+            width: 71%;
+            margin-right: -26%;
+            /*border-color: white !important;*/
+            padding-bottom: 4px !important;
+        }
+
+        #searchIdPlus {
+            text-align: center;
+            background-color: dodgerblue;
+            /*color: white;*/
+            border: 0px solid white;
+            font-size: 20px;
+            padding: 2px;
+            position: relative;
+            z-index: 4;
+            border-radius: 50%;
+            height: 100%;
+            width: 33%;
+            margin-right: -1%;
+            /*border-color: white !important;*/
+            padding-bottom: 4px !important;
+        }
+
+        a {
+            color: white;
+        }
+        .form-control{
+            text-align:center;
+        }
+        .main {
+            float: right;
+            width: 40%;
+            height: 100%;
+            padding: 0 20px;
+            color: white;
+            background-color: black;
+            opacity: 0.6;
+        }
+       aside,#main,h1,h2{
+           color:white;
+           background-color:black;
+           opacity:0.7;
+           text-align:center;
+       }
+        
+    </style>
+</head>
+
+<body id="imag">
+
+    @*<button onclick="updatedatabase('@ViewBag.City')">Reload</button>*@
+
+    <div class="search">
+        <input type="text" id="txtPlaces" style="width: 250px" placeholder="Enter a location" class="form-control">
+
+        <label id="map"></label>
+        <div class="container">
+            <button id="searchId" onclick="search()" class="searchCity" &#8203;class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Search</button><br />
+        </div>
+    </div>
+    <div id="main"></div>
+    <table>
+        <tr>
+            <td>
+                @foreach (var item in Model)
+                {
+                    <div style="float:left;display:inline-block">
+                        <table id="table" align="center" width="100%" style="text-align:center;font-size:28px;background-color:black;opacity:0.6;color:white;" data-target="#desModal">
+                            <tr><td align="center" style="color:white;border-left:1px solid"><a href="@item.city" id="cityIdForeach" onclick="detailsCity('@item.city')"> @item.city </a></td></tr>
+                            @*<tr><td style="float:left;color:white;border-left:1px solid">Feels like &emsp;&ensp;<a> @item.temperature  °C</a></td></tr>
+                            <tr><td style="float:left;border-left:1px solid">Humidity &emsp;&emsp;<a> @item.humidity %</a></td></tr>
+                            <tr><td style="float:left;color:white;border-left:1px solid">Visibility &emsp;&emsp;<a> @item.visibility </a></td></tr>*@
+                        
+                            </table> &emsp;&emsp;
+                    </div>
+                }
+            </td>
+        </tr>
+    </table>
+    <main style="color:white;"></main>
+    <aside></aside>
+    <p></p>
+
+</body>
+
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAGF8cAOPFPIKCZYqxuibF9xx5XD4JBb84&sensor=false&libraries=places"></script>
+    <script type="text/javascript">
+
+        google.maps.event.addDomListener(window, 'load', function () {
+            var places = new google.maps.places.Autocomplete(document.getElementById('txtPlaces'));
+            google.maps.event.addListener(places, 'place_changed', function () {
+                var place = places.getPlace();
+                var address = place.formatted_address;
+                var latitude = place.geometry.location.A;
+                var longitude = place.geometry.location.F;
+                var mesg = "Address: " + address;
+                mesg += "\nLatitude: " + latitude;
+                mesg += "\nLongitude: " + longitude;
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+                //This is used to get a required location's temperature by using searchId
+
+
+        $("#searchId").click(function () {
+            debugger;
+                var cityName = $("#txtPlaces").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("weatherApi", "Home")',
+                data: { cityValue: cityName },
+                success: function (resultData)
+                {
+                     window.location.href = '@Url.Action("weatherApi", "Home")';
+                }
+            });
+        });
+
+           // In this we have the list of all places in a page, and by clicking on the particular location
+           // we get full details of a particular location
+
+                     function detailsCity(cityVal)
+                     {
+                         $.ajax({
+                             type: "POST",
+                             url: '@Url.Action("weatherApiDetails", "Home")',
+                             data: { cityValue: cityVal },
+                             success: function (resultData)
+                             {
+                                 window.location.href = '@Url.Action("weatherApiDetails", "Home")';
+                             }
+                           });
+                     }
+
+                     //location.reload(function () {
+                     //    alert(2);
+                     //    alert('done refreshing and document is ready');
+                     //});
+    </script>
+
+    
+    <script src="https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='@ViewBag.City')&format=json&callback=success"></script>
+    <script>
+        var callbackFunction = function (data) {
+            var temp = data.query.results.channel.item.condition;
+            var atm = data.query.results.channel.atmosphere;
+            var wind = data.query.results.channel.wind;
+            alert("direction is " + wind.direction);
+            alert("current temperature is " + temp.temp);
+            alert("current humidity is " + atm.humidity);
+            alert("current pressure is " + atm.pressure);
+        };
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        //$("#searchId").click(function () {
+        //    debugger;
+        //    var cityName = $("#txtPlaces").val();
+           
+        //    $.ajax({
+        //        type: "POST",
+        //        url: 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22' + cityName + '%2C%20in%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys',
+        //        data: { cityValue: cityName },
+        //        success: function (resultData) {
+        //            $('<h1>').text(resultData.query.results.channel.location.city).appendTo('#main');
+        //            $('<h2>').text('Date: ').appendTo('#main');
+        //            $('#main').append(resultData.query.results.channel.item.condition.date);
+        //            $('<h2>').text('Temperature: ').appendTo('#main');
+        //            $('#main').append(resultData.query.results.channel.item.condition.temp);
+        //            $('<h2>').text('Humidity: ').appendTo('#main');
+        //            $('#main').append(resultData.query.results.channel.atmosphere.humidity);
+        //            $('<h2>').text('Details: ').appendTo('#main');
+        //            $('#main').append(resultData.query.results.channel.item.description);
+        //            //$('<h1>').text(resultData.query.results.channel.title).appendTo('#main');
+        //            //$('#main').append(resultData.query.results.channel.item.description);
+        //        }
+        //    });
+        //});
+
+    </script>
+    
